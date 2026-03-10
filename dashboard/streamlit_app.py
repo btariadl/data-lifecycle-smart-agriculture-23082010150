@@ -2,13 +2,14 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from pathlib import Path
 
 st.set_page_config(page_title="Smart Agriculture Dashboard", layout="wide")
 
-# Load data
-df = pd.read_csv("../outputs/cleaned_data.csv")
+base_dir = Path(__file__).resolve().parents[1]
+file_path = base_dir / "outputs" / "cleaned_data.csv"
 
-# Pastikan kolom waktu terbaca sebagai datetime
+df = pd.read_csv(file_path)
 df["record_time"] = pd.to_datetime(df["record_time"])
 
 st.title("Smart Agriculture Dashboard")
